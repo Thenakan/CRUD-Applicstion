@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    color: #fff;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #fff;
+    margin: 20px 0;
+  }
+  
+  /* Container Styles */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Form Styles */
+  .label-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .label-form input {
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    padding: 12px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .label-form input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .label-form button {
+    padding: 12px 20px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .label-form button:hover {
+    background: #45a049;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Label List */
+  .label-list {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .label-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .label-item strong {
+    font-size: 18px;
+  }
+  
+  .label-item button {
+    padding: 8px 15px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-size: 14px;
+  }
+  
+  .label-item button:hover {
+    background: #d32f2f;
+    transform: scale(1.1);
+  }
+  
+  .label-item button:last-child {
+    background: #2196f3;
+    margin-left: 10px;
+  }
+  
+  .label-item button:last-child:hover {
+    background: #1e88e5;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .label-form button, .label-item button {
+      width: 100%;
+      margin: 5px 0;
+    }
+    .label-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  

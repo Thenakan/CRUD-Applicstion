@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Label CRUD</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .label-form, .label-list { margin-bottom: 20px; }
+    button { margin: 5px; }
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1> CRUD Application</h1>
+
+  <!-- Form -->
+  <div class="label-form">
+    <h2>Add Label</h2>
+    <input type="text" id="name" placeholder="Label Name" required />
+    <input type="text" id="description" placeholder="Label Description" />
+    <button onclick="createLabel()">Add Label</button>
+  </div>
+
+  <!-- List -->
+  <div class="label-list">
+    <h2>All Labels</h2>
+    <div id="labels"></div>
+  </div>
+
+
+
+  <script>
+    const API_URL = 'http://localhost:5001/labels';
+
+    // Fetch and display labels
+    async function fetchLabels() {
+      const response = await fetch(API_URL);
+      const labels = await response.json();
+      const labelsDiv = document.getElementById('labels');
+      labelsDiv.innerHTML = labels
+        .map(
+          (label) => `
+          <div>
+            <strong>${label.name}</strong>: ${label.description || 'No description'}
+            <button onclick="deleteLabel('${label._id}')">Delete</button>
+            <button onclick="updateLabel('${label._id}', '${label.name}', '${label.description}')">Edit</button>
+          </div>`
+        )
+        .join('');
+    }
+
+    // Create a new label
+    async function createLabel() {
+      const name = document.getElementById('name').value;
+      const description = document.getElementById('description').value;
+
+      if (!name) return alert('Name is required');
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, description }),
+      });
+      document.getElementById('name').value = '';
+      document.getElementById('description').value = '';
+      fetchLabels();
+    }
+
+    // Delete a label
+    async function deleteLabel(id) {
+      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      fetchLabels();
+    }
+
+    // Update a label
+    async function updateLabel(id, currentName, currentDescription) {
+      const name = prompt('Update Name:', currentName);
+      const description = prompt('Update Description:', currentDescription);
+
+      if (!name) return alert('Name is required');
+      await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, description }),
+      });
+      fetchLabels();
+    }
+
+    // Initial fetch
+    fetchLabels();
+  </script>
+</body>
+</html>
